@@ -8,7 +8,7 @@ use error::Result;
 
 fn run_one(fname: &str) -> Result<()> {
 	let bs = file::read(fname)?;
-	let bs = fix_ws::get(bs);
+	let bs = fix_ws::get(&bs);
 	file::write(fname, &bs)?;
 	Ok(())
 }
