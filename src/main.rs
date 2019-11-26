@@ -1,14 +1,14 @@
-//! Removes trailing whitespace.
+//! Removes trailing whitespace and adds a newline at EOF.
 
 mod error;
 mod file;
-mod rm_ws;
+mod fix_ws;
 
 use error::Result;
 
 fn run_one(fname: &str) -> Result<()> {
 	let bs = file::read(fname)?;
-	let bs = rm_ws::get(bs);
+	let bs = fix_ws::get(bs);
 	file::write(fname, &bs)?;
 	Ok(())
 }
