@@ -1,5 +1,6 @@
 //! Removes trailing whitespace and adds a newline at EOF.
 
+mod args;
 mod error;
 mod file;
 mod fix_ws;
@@ -14,8 +15,8 @@ fn run_one(fname: &str) -> Result<()> {
 }
 
 fn run() -> Result<()> {
-	for arg in std::env::args() {
-		run_one(&arg)?;
+	for fname in args::get().fnames {
+		run_one(&fname)?;
 	}
 	Ok(())
 }

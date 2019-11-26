@@ -4,3 +4,6 @@ version = "0.1.0"
 authors = ["Ariel Davis <ariel.z.davis@icloud.com>"]
 edition = "2018"
 publish = false
+
+[dependencies]
+clap = "2.33.0"
