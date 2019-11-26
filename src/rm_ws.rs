@@ -11,5 +11,10 @@ pub fn get(bs: Vec<u8>) -> Vec<u8> {
 			ret.push(b);
 		}
 	}
+	if let Some(&b) = ret.last() {
+		if b != b'\n' {
+			ret.push(b'\n');
+		}
+	}
 	ret
 }
