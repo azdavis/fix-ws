@@ -1,22 +1,17 @@
 //! Removes trailing whitespace and adds a newline at EOF.
 
-mod args;
+mod config;
 mod error;
 mod file;
 mod fix_ws;
 
 use error::Result;
 
-fn run_one(fname: &str) -> Result<()> {
-	let bs = file::read(fname)?;
-	let bs = fix_ws::get(&bs);
-	file::write(fname, &bs)?;
-	Ok(())
-}
-
 fn run() -> Result<()> {
-	for fname in args::get().fnames {
-		run_one(&fname)?;
+	for fname in config::get().fnames.iter() {
+		let bs = file::read(fname)?;
+		let bs = fix_ws::get(&bs);
+		file::write(fname, &bs)?;
 	}
 	Ok(())
 }
