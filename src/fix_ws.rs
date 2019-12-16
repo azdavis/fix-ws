@@ -3,15 +3,20 @@
 pub fn get(bs: &[u8]) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	let mut pending = Vec::new();
+	let mut new_lines = 0;
 	for &b in bs {
 		if b == b'\n' {
 			pending.clear();
-			ret.push(b);
+			new_lines += 1;
 			continue;
 		}
 		if b.is_ascii_whitespace() {
 			pending.push(b);
 		} else {
+			for _ in 0..new_lines {
+				ret.push(b'\n');
+			}
+			new_lines = 0;
 			ret.append(&mut pending);
 			ret.push(b);
 		}
