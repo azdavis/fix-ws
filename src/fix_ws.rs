@@ -36,6 +36,13 @@ mod tests {
 	}
 
 	#[test]
+	fn multi_nl_at_eof() {
+		let inp = include_bytes!("test-inputs/multi-nl-at-eof/inp.txt");
+		let out = include_bytes!("test-inputs/multi-nl-at-eof/out.txt").to_vec();
+		assert_eq!(out, get(inp));
+	}
+
+	#[test]
 	fn no_change() {
 		let inp = include_bytes!("test-inputs/no-change/inp.txt");
 		let out = inp.to_vec();
