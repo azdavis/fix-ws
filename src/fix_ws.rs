@@ -35,43 +35,43 @@ mod tests {
 
 	#[test]
 	fn empty() {
-		let inp = include_bytes!("test-inputs/empty/inp.txt");
+		let inp = include_bytes!("test_inputs/empty/inp.txt");
 		let out = inp.to_vec();
 		assert_eq!(out, get(inp));
 	}
 
 	#[test]
 	fn multi_nl_at_eof() {
-		let inp = include_bytes!("test-inputs/multi-nl-at-eof/inp.txt");
-		let out = include_bytes!("test-inputs/multi-nl-at-eof/out.txt").to_vec();
+		let inp = include_bytes!("test_inputs/multi_nl_at_eof/inp.txt");
+		let out = include_bytes!("test_inputs/multi_nl_at_eof/out.txt").to_vec();
 		assert_eq!(out, get(inp));
 	}
 
 	#[test]
 	fn intervening_lines() {
-		let inp = include_bytes!("test-inputs/intervening-lines/inp.txt");
-		let out = include_bytes!("test-inputs/intervening-lines/out.txt").to_vec();
+		let inp = include_bytes!("test_inputs/intervening_lines/inp.txt");
+		let out = include_bytes!("test_inputs/intervening_lines/out.txt").to_vec();
 		assert_eq!(out, get(inp));
 	}
 
 	#[test]
 	fn no_change() {
-		let inp = include_bytes!("test-inputs/no-change/inp.txt");
+		let inp = include_bytes!("test_inputs/no_change/inp.txt");
 		let out = inp.to_vec();
 		assert_eq!(out, get(inp));
 	}
 
 	#[test]
 	fn no_nl_at_eof() {
-		let inp = include_bytes!("test-inputs/no-nl-at-eof/inp.txt");
-		let out = include_bytes!("test-inputs/no-nl-at-eof/out.txt").to_vec();
+		let inp = include_bytes!("test_inputs/no_nl_at_eof/inp.txt");
+		let out = include_bytes!("test_inputs/no_nl_at_eof/out.txt").to_vec();
 		assert_eq!(out, get(inp));
 	}
 
 	#[test]
 	fn trailing() {
-		let inp = include_bytes!("test-inputs/trailing/inp.txt");
-		let out = include_bytes!("test-inputs/trailing/out.txt").to_vec();
+		let inp = include_bytes!("test_inputs/trailing/inp.txt");
+		let out = include_bytes!("test_inputs/trailing/out.txt").to_vec();
 		assert_eq!(out, get(inp));
 	}
 }
