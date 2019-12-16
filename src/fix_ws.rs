@@ -36,6 +36,13 @@ mod tests {
 	}
 
 	#[test]
+	fn no_change() {
+		let inp = include_bytes!("test-inputs/no-change/inp.txt");
+		let out = inp.to_vec();
+		assert_eq!(out, get(inp));
+	}
+
+	#[test]
 	fn no_nl_at_eof() {
 		let inp = include_bytes!("test-inputs/no-nl-at-eof/inp.txt");
 		let out = include_bytes!("test-inputs/no-nl-at-eof/out.txt").to_vec();
@@ -46,13 +53,6 @@ mod tests {
 	fn trailing() {
 		let inp = include_bytes!("test-inputs/trailing/inp.txt");
 		let out = include_bytes!("test-inputs/trailing/out.txt").to_vec();
-		assert_eq!(out, get(inp));
-	}
-
-	#[test]
-	fn no_change() {
-		let inp = include_bytes!("test-inputs/no-change/inp.txt");
-		let out = inp.to_vec();
 		assert_eq!(out, get(inp));
 	}
 }
