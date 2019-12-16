@@ -12,14 +12,14 @@ pub fn get(bs: &[u8]) -> Vec<u8> {
 		}
 		if b.is_ascii_whitespace() {
 			cur_line.push(b);
-		} else {
-			for _ in 0..new_lines {
-				ret.push(b'\n');
-			}
-			new_lines = 0;
-			ret.append(&mut cur_line);
-			ret.push(b);
+			continue;
 		}
+		for _ in 0..new_lines {
+			ret.push(b'\n');
+		}
+		new_lines = 0;
+		ret.append(&mut cur_line);
+		ret.push(b);
 	}
 	if let Some(&b) = ret.last() {
 		if b != b'\n' {
