@@ -10,13 +10,12 @@ pub fn get() -> Config {
 }
 
 fn get_impl(matches: clap::ArgMatches<'static>) -> Config {
-	Config {
-		fnames: matches
-			.values_of("file")
-			.unwrap()
-			.map(ToString::to_string)
-			.collect(),
-	}
+	let fnames = matches
+		.values_of("file")
+		.unwrap()
+		.map(ToString::to_string)
+		.collect();
+	Config { fnames }
 }
 
 fn app() -> clap::App<'static, 'static> {
