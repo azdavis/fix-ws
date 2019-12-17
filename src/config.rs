@@ -23,7 +23,7 @@ fn app() -> clap::App<'static, 'static> {
 	// TODO use crate_authors
 	clap::App::new(clap::crate_name!())
 		.version(clap::crate_version!())
-		.author("Ariel Davis <azdavis@andrew.cmu.edu>")
+		.author("Ariel Davis <ariel.z.davis@icloud.com>")
 		.about("Fixes whitespace")
 		.arg(
 			clap::Arg::with_name("file")
