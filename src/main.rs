@@ -1,4 +1,7 @@
-//! Removes trailing whitespace and adds a newline at EOF.
+//! Fixes whitespace by:
+//! - Removing trailing whitespace.
+//! - Ensuring there is exactly one newline at EOF.
+//! - Optionally converting indentation between tabs and spaces.
 
 mod config;
 mod error;
