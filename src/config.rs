@@ -5,17 +5,17 @@ pub struct Config {
 	pub fnames: Vec<String>,
 }
 
-pub fn get() -> Config {
+pub fn get() -> Result<Config> {
 	get_impl(app().get_matches())
 }
 
-fn get_impl(matches: clap::ArgMatches<'static>) -> Config {
+fn get_impl(matches: clap::ArgMatches<'static>) -> Result<Config> {
 	let fnames = matches
 		.values_of("file")
 		.unwrap()
 		.map(ToString::to_string)
 		.collect();
-	Config { fnames }
+	Ok(Config { fnames, convert })
 }
 
 fn app() -> clap::App<'static, 'static> {
