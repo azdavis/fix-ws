@@ -2,23 +2,23 @@
 
 pub fn get(bs: &[u8]) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
-	let mut cur_line = Vec::new();
+	let mut cur_line_ws = Vec::new();
 	let mut new_lines = 0;
 	for &b in bs {
 		if b == b'\n' {
-			cur_line.clear();
+			cur_line_ws.clear();
 			new_lines += 1;
 			continue;
 		}
 		if b.is_ascii_whitespace() {
-			cur_line.push(b);
+			cur_line_ws.push(b);
 			continue;
 		}
 		for _ in 0..new_lines {
 			ret.push(b'\n');
 		}
 		new_lines = 0;
-		ret.append(&mut cur_line);
+		ret.append(&mut cur_line_ws);
 		ret.push(b);
 	}
 	if let Some(&b) = ret.last() {
