@@ -43,6 +43,20 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 	ret
 }
 
+fn convert_tabs(bs: &[u8], n: usize) -> Vec<u8> {
+	let mut ret = Vec::with_capacity(bs.len());
+	for &b in bs {
+		if b == b'\t' {
+			for _ in 0..n {
+				ret.push(b' ');
+			}
+		} else {
+			ret.push(b);
+		}
+	}
+	ret
+}
+
 fn convert_spaces(bs: &[u8], n: usize) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	let mut consec_spaces = 0;
@@ -65,20 +79,6 @@ fn convert_spaces(bs: &[u8], n: usize) -> Vec<u8> {
 		ret.push(b' ');
 	}
 	ret.shrink_to_fit();
-	ret
-}
-
-fn convert_tabs(bs: &[u8], n: usize) -> Vec<u8> {
-	let mut ret = Vec::with_capacity(bs.len());
-	for &b in bs {
-		if b == b'\t' {
-			for _ in 0..n {
-				ret.push(b' ');
-			}
-		} else {
-			ret.push(b);
-		}
-	}
 	ret
 }
 
