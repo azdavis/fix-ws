@@ -31,9 +31,9 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 		} else {
 			cur_line_ws
 		};
+		cur_line_just_ws = false;
 		ret.append(&mut cur_line_ws);
 		ret.push(b);
-		cur_line_just_ws = false;
 	}
 	if let Some(&b) = ret.last() {
 		if b != b'\n' {
@@ -71,8 +71,8 @@ fn convert_to_tabs(bs: &[u8], n: usize) -> Vec<u8> {
 			for _ in 0..consec_spaces {
 				ret.push(b' ');
 			}
-			ret.push(b);
 			consec_spaces = 0;
+			ret.push(b);
 		}
 	}
 	for _ in 0..consec_spaces {
