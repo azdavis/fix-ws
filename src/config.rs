@@ -1,6 +1,7 @@
 //! Parses command line arguments into a config.
 
 pub struct Config {
+	/// A list of file names to fix whitespace for.
 	pub fnames: Vec<String>,
 }
 
