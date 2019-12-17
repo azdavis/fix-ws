@@ -40,6 +40,7 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 			ret.push(b'\n');
 		}
 	}
+	ret.shrink_to_fit();
 	ret
 }
 
