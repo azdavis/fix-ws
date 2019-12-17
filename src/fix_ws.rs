@@ -25,8 +25,8 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 		cur_line_ws = if cur_line_just_ws {
 			match convert {
 				None => cur_line_ws,
-				Some((Indent::Spaces, n)) => convert_spaces(&cur_line_ws, n),
-				Some((Indent::Tabs, n)) => convert_tabs(&cur_line_ws, n),
+				Some((Indent::Spaces, n)) => convert_to_spaces(&cur_line_ws, n),
+				Some((Indent::Tabs, n)) => convert_to_tabs(&cur_line_ws, n),
 			}
 		} else {
 			cur_line_ws
@@ -43,7 +43,7 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 	ret
 }
 
-fn convert_tabs(bs: &[u8], n: usize) -> Vec<u8> {
+fn convert_to_spaces(bs: &[u8], n: usize) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	for &b in bs {
 		if b == b'\t' {
@@ -57,7 +57,7 @@ fn convert_tabs(bs: &[u8], n: usize) -> Vec<u8> {
 	ret
 }
 
-fn convert_spaces(bs: &[u8], n: usize) -> Vec<u8> {
+fn convert_to_tabs(bs: &[u8], n: usize) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	let mut consec_spaces = 0;
 	for &b in bs {
@@ -134,14 +134,14 @@ mod tests {
 	fn spaces_to_tabs() {
 		let inp = include_bytes!("test_inputs/spaces_to_tabs/inp.txt");
 		let out = include_bytes!("test_inputs/spaces_to_tabs/out.txt").to_vec();
-		assert_eq!(out, get(inp, Some((Indent::Spaces, 2))));
+		assert_eq!(out, get(inp, Some((Indent::Tabs, 2))));
 	}
 
 	#[test]
 	fn tabs_to_spaces() {
 		let inp = include_bytes!("test_inputs/tabs_to_spaces/inp.txt");
 		let out = include_bytes!("test_inputs/tabs_to_spaces/out.txt").to_vec();
-		assert_eq!(out, get(inp, Some((Indent::Tabs, 2))));
+		assert_eq!(out, get(inp, Some((Indent::Spaces, 2))));
 	}
 
 	#[test]
