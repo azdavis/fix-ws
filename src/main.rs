@@ -8,9 +8,10 @@ mod fix_ws;
 use error::Result;
 
 fn run() -> Result<()> {
-	for fname in config::get()?.fnames.iter() {
+	let c = config::get()?;
+	for fname in c.fnames.iter() {
 		let bs = file::read(fname)?;
-		let bs = fix_ws::get(&bs);
+		let bs = fix_ws::get(&bs, c.convert);
 		file::write(fname, &bs)?;
 	}
 	Ok(())
