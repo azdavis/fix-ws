@@ -51,9 +51,9 @@ fn convert_to_spaces(bs: &[u8], n: usize) -> Vec<u8> {
 			for _ in 0..n {
 				ret.push(b' ');
 			}
-		} else {
-			ret.push(b);
+			continue;
 		}
+		ret.push(b);
 	}
 	ret
 }
@@ -68,13 +68,13 @@ fn convert_to_tabs(bs: &[u8], n: usize) -> Vec<u8> {
 				consec_spaces = 0;
 				ret.push(b'\t');
 			}
-		} else {
-			for _ in 0..consec_spaces {
-				ret.push(b' ');
-			}
-			consec_spaces = 0;
-			ret.push(b);
+			continue;
 		}
+		for _ in 0..consec_spaces {
+			ret.push(b' ');
+		}
+		consec_spaces = 0;
+		ret.push(b);
 	}
 	for _ in 0..consec_spaces {
 		ret.push(b' ');
