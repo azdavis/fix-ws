@@ -99,9 +99,9 @@ mod tests {
 	}
 
 	#[test]
-	fn multi_nl_at_eof() {
-		let inp = include_bytes!("test_inputs/multi_nl_at_eof/inp.txt");
-		let out = include_bytes!("test_inputs/multi_nl_at_eof/out.txt").to_vec();
+	fn multi_lf_at_eof() {
+		let inp = include_bytes!("test_inputs/multi_lf_at_eof/inp.txt");
+		let out = include_bytes!("test_inputs/multi_lf_at_eof/out.txt").to_vec();
 		assert_eq!(out, get(inp, None));
 		for i in 1..=8 {
 			assert_eq!(out, get(inp, Some((Indent::Spaces, i))));
@@ -121,9 +121,9 @@ mod tests {
 	}
 
 	#[test]
-	fn no_nl_at_eof() {
-		let inp = include_bytes!("test_inputs/no_nl_at_eof/inp.txt");
-		let out = include_bytes!("test_inputs/no_nl_at_eof/out.txt").to_vec();
+	fn no_lf_at_eof() {
+		let inp = include_bytes!("test_inputs/no_lf_at_eof/inp.txt");
+		let out = include_bytes!("test_inputs/no_lf_at_eof/out.txt").to_vec();
 		assert_eq!(out, get(inp, None));
 		for i in 1..8 {
 			assert_eq!(out, get(inp, Some((Indent::Spaces, i))));
