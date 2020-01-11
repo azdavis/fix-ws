@@ -20,6 +20,7 @@ Install [rust][], clone this repo, `cd` inside, and then
 
 ```
 $ cargo build
+$ cargo test
 ```
 
 [brew]: https://brew.sh
