@@ -3,7 +3,7 @@
 Fixes whitespace by:
 
 - Removing trailing whitespace.
-- Ensuring there is exactly one newline at EOF.
+- Ensuring there is exactly one LF at EOF.
 - Optionally converting indentation between tabs and spaces.
 
 ## Installation
