@@ -8,6 +8,9 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 	let mut cur_line_just_ws = true;
 	let mut new_lines = 0;
 	for &b in bs {
+		if b == b'\r' {
+			continue;
+		}
 		if b == b'\n' {
 			cur_line_ws.clear();
 			new_lines += 1;
@@ -86,6 +89,13 @@ fn convert_to_tabs(bs: &[u8], n: usize) -> Vec<u8> {
 #[cfg(test)]
 mod tests {
 	use super::{get, Indent};
+
+	#[test]
+	fn crlf() {
+		let inp = include_bytes!("test_inputs/crlf/inp.txt");
+		let out = include_bytes!("test_inputs/crlf/out.txt").to_vec();
+		assert_eq!(out, get(inp, None));
+	}
 
 	#[test]
 	fn empty() {
