@@ -5,9 +5,7 @@ mod error;
 mod file;
 mod fix_ws;
 
-use error::Result;
-
-fn run() -> Result<()> {
+fn run() -> error::Result<()> {
 	let c = config::get()?;
 	for fname in c.fnames.iter() {
 		let bs = file::read(fname)?;
