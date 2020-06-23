@@ -1,23 +1,35 @@
 //! A fix for whitespace.
 
-mod config;
-mod error;
-mod file;
+mod args;
 mod fix_ws;
 
-fn run() -> error::Result<()> {
-	let c = config::get()?;
-	for fname in c.fnames.iter() {
-		let bs = file::read(fname)?;
-		let bs = fix_ws::get(&bs, c.convert);
-		file::write(fname, &bs)?;
+fn run() -> bool {
+	let args = match args::get() {
+		Ok(x) => x,
+		Err(e) => return e,
+	};
+	for f in args.files {
+		let bs = match std::fs::read(&f) {
+			Ok(x) => x,
+			Err(e) => {
+				eprintln!("{}: {}", f, e);
+				return false;
+			}
+		};
+		let bs = fix_ws::get(&bs, args.convert);
+		match std::fs::write(&f, &bs) {
+			Ok(()) => {}
+			Err(e) => {
+				eprintln!("{}: {}", f, e);
+				return false;
+			}
+		}
 	}
-	Ok(())
+	true
 }
 
 fn main() {
-	if let Err(e) = run() {
-		eprintln!("error: {}", e);
+	if !run() {
 		std::process::exit(1);
 	}
 }

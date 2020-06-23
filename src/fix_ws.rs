@@ -1,6 +1,6 @@
 //! The core logic.
 
-use crate::config::{Convert, Indent};
+use crate::args::{Convert, Indent};
 
 pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
@@ -47,7 +47,7 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
 	ret
 }
 
-fn convert_to_spaces(bs: &[u8], n: usize) -> Vec<u8> {
+fn convert_to_spaces(bs: &[u8], n: u8) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	for &b in bs {
 		if b == b'\t' {
@@ -61,7 +61,7 @@ fn convert_to_spaces(bs: &[u8], n: usize) -> Vec<u8> {
 	ret
 }
 
-fn convert_to_tabs(bs: &[u8], n: usize) -> Vec<u8> {
+fn convert_to_tabs(bs: &[u8], n: u8) -> Vec<u8> {
 	let mut ret = Vec::with_capacity(bs.len());
 	let mut consec_spaces = 0;
 	for &b in bs {
