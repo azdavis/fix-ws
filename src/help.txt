@@ -1,0 +1,11 @@
+usage: fix-ws [options] <file>...
+
+options:
+  -h, --help
+    show this help
+  -v, --version
+    show the version
+  -s, --spaces <N>
+    convert an indentation tab into N spaces
+  -t, --tabs <N>
+    convert N indentation spaces into a tab

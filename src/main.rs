@@ -5,8 +5,12 @@ mod fix_ws;
 
 fn run() -> bool {
   let args = match args::get() {
-    Ok(x) => x,
-    Err(e) => return e,
+    Ok(Some(x)) => x,
+    Ok(None) => return true,
+    Err(e) => {
+      eprintln!("{}", e);
+      return false;
+    }
   };
   for f in args.files {
     let bs = match std::fs::read(&f) {

@@ -1,40 +1,29 @@
 //! Command-line arguments.
 
-use gumdrop::Options;
-
-pub fn get() -> Result<Args, bool> {
-  let raw = RawArgs::parse_args_default_or_exit();
-  if raw.version {
-    println!("{}", env!("CARGO_PKG_VERSION"));
-    return Err(true);
+pub fn get() -> Result<Option<Args>, Box<dyn std::error::Error>> {
+  let mut args = pico_args::Arguments::from_env();
+  if args.contains(["-h", "--help"]) {
+    print!("{}", include_str!("help.txt"));
+    return Ok(None);
   }
-  let convert = match (raw.spaces, raw.tabs) {
+  if args.contains(["-v", "--version"]) {
+    println!("{}", env!("CARGO_PKG_VERSION"));
+    return Ok(None);
+  }
+  let spaces: Option<u8> = args.opt_value_from_str(["-s", "--spaces"])?;
+  let tabs: Option<u8> = args.opt_value_from_str(["-t", "--tabs"])?;
+  let convert = match (spaces, tabs) {
     (None, None) => None,
     (Some(x), None) => Some((Indent::Spaces, x)),
     (None, Some(x)) => Some((Indent::Tabs, x)),
     (Some(..), Some(..)) => {
-      eprintln!("cannot pass both --spaces and --tabs");
-      return Err(false);
+      return Err("cannot pass both --spaces and --tabs".into())
     }
   };
-  Ok(Args {
+  Ok(Some(Args {
     convert,
-    files: raw.files,
-  })
-}
-
-#[derive(Options)]
-struct RawArgs {
-  #[options(help = "Show this help")]
-  help: bool,
-  #[options(help = "Show the version")]
-  version: bool,
-  #[options(help = "Use spaces to indent")]
-  spaces: Option<u8>,
-  #[options(help = "Use tabs to indent")]
-  tabs: Option<u8>,
-  #[options(free, help = "Files")]
-  files: Vec<String>,
+    files: args.free()?,
+  }))
 }
 
 pub struct Args {

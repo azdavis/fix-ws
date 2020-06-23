@@ -6,4 +6,4 @@ edition = "2018"
 publish = false
 
 [dependencies]
-gumdrop = "0.8.0"
+pico-args = "0.3.2"
