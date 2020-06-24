@@ -1,4 +1,5 @@
-usage: fix-ws [options] <file>...
+usage:
+  fix-ws [options] <file>...
 
 options:
   -h, --help
