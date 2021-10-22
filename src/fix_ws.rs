@@ -21,9 +21,7 @@ pub fn get(bs: &[u8], convert: Convert) -> Vec<u8> {
       cur_line_ws.push(b);
       continue;
     }
-    for _ in 0..new_lines {
-      ret.push(b'\n');
-    }
+    ret.resize(ret.len() + new_lines, b'\n');
     new_lines = 0;
     cur_line_ws = if cur_line_just_ws {
       match convert {
@@ -51,9 +49,7 @@ fn convert_to_spaces(bs: &[u8], n: u8) -> Vec<u8> {
   let mut ret = Vec::with_capacity(bs.len());
   for &b in bs {
     if b == b'\t' {
-      for _ in 0..n {
-        ret.push(b' ');
-      }
+      ret.resize(ret.len() + (n as usize), b' ');
       continue;
     }
     ret.push(b);
@@ -73,15 +69,11 @@ fn convert_to_tabs(bs: &[u8], n: u8) -> Vec<u8> {
       }
       continue;
     }
-    for _ in 0..consec_spaces {
-      ret.push(b' ');
-    }
+    ret.resize(ret.len() + (consec_spaces as usize), b' ');
     consec_spaces = 0;
     ret.push(b);
   }
-  for _ in 0..consec_spaces {
-    ret.push(b' ');
-  }
+  ret.resize(ret.len() + (consec_spaces as usize), b' ');
   ret.shrink_to_fit();
   ret
 }
