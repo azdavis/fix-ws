@@ -1,15 +1,24 @@
 name: ci
 on: [push]
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Check formatting
-        run: cargo fmt -- --check
-      - name: Run clippy
-        run: cargo clippy
-      - name: Build
-        run: cargo build
-      - name: Test
-        run: cargo test
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: -- --check
+      - uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: -- -D warnings
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
