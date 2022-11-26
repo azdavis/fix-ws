@@ -1,5 +1,8 @@
 //! A fix for whitespace.
 
+#[cfg(test)]
+mod tests;
+
 mod args;
 mod fix_ws;
 
