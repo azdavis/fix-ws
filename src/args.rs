@@ -16,9 +16,7 @@ pub fn get() -> Result<Option<Args>, Box<dyn std::error::Error>> {
     (None, None) => None,
     (Some(x), None) => Some((Indent::Spaces, x)),
     (None, Some(x)) => Some((Indent::Tabs, x)),
-    (Some(..), Some(..)) => {
-      return Err("cannot pass both --spaces and --tabs".into())
-    }
+    (Some(..), Some(..)) => return Err("cannot pass both --spaces and --tabs".into()),
   };
   Ok(Some(Args {
     convert,
