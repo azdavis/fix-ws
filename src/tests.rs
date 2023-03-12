@@ -72,7 +72,6 @@ fn trailing() {
   let out = include_bytes!("test_inputs/trailing/out.txt").to_vec();
   assert_eq!(out, get(inp, None));
   for i in 2..=8 {
-    println!("{}", i);
     assert_eq!(out, get(inp, Some((Indent::Spaces, i))));
     assert_eq!(out, get(inp, Some((Indent::Tabs, i))));
   }

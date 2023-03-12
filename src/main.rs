@@ -1,5 +1,7 @@
 //! A fix for whitespace.
 
+#![deny(clippy::pedantic, rust_2018_idioms)]
+
 #[cfg(test)]
 mod tests;
 
@@ -11,13 +13,13 @@ fn run() -> bool {
     Ok(Some(x)) => x,
     Ok(None) => return true,
     Err(e) => {
-      eprintln!("{}", e);
+      eprintln!("{e}");
       return false;
     }
   };
   for f in args.files {
     let f = std::path::Path::new(f.as_os_str());
-    let bs = match std::fs::read(&f) {
+    let bs = match std::fs::read(f) {
       Ok(x) => x,
       Err(e) => {
         eprintln!("{}: {}", f.display(), e);
@@ -25,7 +27,7 @@ fn run() -> bool {
       }
     };
     let bs = fix_ws::get(&bs, args.convert);
-    match std::fs::write(&f, &bs) {
+    match std::fs::write(f, &bs) {
       Ok(()) => {}
       Err(e) => {
         eprintln!("{}: {}", f.display(), e);
