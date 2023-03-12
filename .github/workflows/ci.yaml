@@ -18,11 +18,11 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
+      - name: Build
+        run: cargo build
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Run clippy
         run: cargo clippy
-      - name: Build
-        run: cargo build
       - name: Test
         run: cargo test
