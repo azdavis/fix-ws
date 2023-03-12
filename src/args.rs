@@ -22,13 +22,13 @@ pub fn get() -> Result<Option<Args>, Box<dyn std::error::Error>> {
   };
   Ok(Some(Args {
     convert,
-    files: args.free()?,
+    files: args.finish(),
   }))
 }
 
 pub struct Args {
   pub convert: Convert,
-  pub files: Vec<String>,
+  pub files: Vec<std::ffi::OsString>,
 }
 
 #[derive(Clone, Copy)]

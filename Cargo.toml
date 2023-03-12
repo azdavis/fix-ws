@@ -1,9 +1,9 @@
 [package]
 name = "fix-ws"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Ariel Davis <ariel.z.davis@icloud.com>"]
 edition = "2021"
 publish = false
 
 [dependencies]
-pico-args = "0.3.2"
+pico-args = "0.5"

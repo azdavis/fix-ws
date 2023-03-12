@@ -16,10 +16,11 @@ fn run() -> bool {
     }
   };
   for f in args.files {
+    let f = std::path::Path::new(f.as_os_str());
     let bs = match std::fs::read(&f) {
       Ok(x) => x,
       Err(e) => {
-        eprintln!("{}: {}", f, e);
+        eprintln!("{}: {}", f.display(), e);
         return false;
       }
     };
@@ -27,7 +28,7 @@ fn run() -> bool {
     match std::fs::write(&f, &bs) {
       Ok(()) => {}
       Err(e) => {
-        eprintln!("{}: {}", f, e);
+        eprintln!("{}: {}", f.display(), e);
         return false;
       }
     }
