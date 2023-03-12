@@ -3,5 +3,12 @@
     "target": true
   },
   "rust-analyzer.check.command": "clippy",
-  "cSpell.words": ["azdavis", "clippy", "dtolnay", "RUSTFLAGS", "rustfmt"]
+  "cSpell.words": [
+    "azdavis",
+    "clippy",
+    "dtolnay",
+    "pico",
+    "RUSTFLAGS",
+    "rustfmt"
+  ]
 }
