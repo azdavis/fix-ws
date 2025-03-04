@@ -2,7 +2,7 @@
 name = "fix-ws"
 version = "0.3.1"
 authors = ["Ariel Davis <ariel.z.davis@icloud.com>"]
-edition = "2021"
+edition = "2024"
 publish = false
 
 [dependencies]
